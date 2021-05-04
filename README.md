@@ -33,7 +33,7 @@ NES emulator written in Rust completely from scratch based only on publicly avai
   - [ ] Tri Wave
   - [ ] Noise
   - [ ] DMC
-- [ ] Emulation feature
+- [x] Emulation feature
     - [x] Snapshot
     - [x] Restore
     - [ ] Savestate support

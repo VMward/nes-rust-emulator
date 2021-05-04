@@ -1,24 +1,26 @@
 [package]
-name = "nes-rust-emulator"
+name = "nes-emulator"
 version = "0.1.0"
-authors = ["Benjamin Fan </benjaminfan.github.io/>"]
+authors = ["Ben Fan <benjaminfan.github.io>"]
 edition = "2021"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[[bin]]
+name = "nes-emulator"
+path = "src/main.rs"
+
+[[bench]]
+name = "emulator"
+harness = false
+
+[dev-dependencies]
+criterion = "0.3"
+clap = "3.0.0-beta.1"
+env_logger = "0.7"
 
 [dependencies]
-
-features]
-default = [ "unsafe-opt" ]
-unsafe-opt = []
-
-[profile.dev]
-opt-level = 0
+sdl2 = "0.32"
+log = "0.4.11"
+tokio = {version = "0.2", features = ["uds"]}
 
 [profile.release]
 opt-level = 3
-lto = true
-
-[lib]
-path = "src/lib.rs"
-name = "rust_nes_emulator"
