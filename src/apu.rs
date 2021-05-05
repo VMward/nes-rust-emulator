@@ -10,20 +10,28 @@ pub enum PulseDutyCycle {
 
 #[derive(Copy, Clone)]
 pub struct PulseSound {
-    /// Duty Cycle $4000 - $4004
+    // Initalize Duty Cycle $4000 - $4004
     pub duty_cycle: PulseDutyCycle,
+    // Playback time counter enabled
     pub is_length_counter_halt: bool,
+    // sound selection
     pub is_constant_volume: bool,
+    // volum 4bit
     pub volume: u8,
 
-    // $4001 / $4005
+    // frequency sweep $4001 / $4005
     pub is_sweep_enable: bool,
+    // value
     pub sweep_period: u8,
+    // direction (add/sub)
     pub is_sweep_negative: bool,
+    // range
     pub sweep_shift: u8,
 
     // $4002, $4003 / $4006, $4007
+    // Frequency   
     pub timer_value: u16,
+    // playback
     pub length_counter_load: u8,
 }
 impl Default for PulseSound {
@@ -52,11 +60,13 @@ impl PulseSound {
 #[derive(Copy, Clone)]
 pub struct TriangleSound {
     // $4008
-    /// 再生時間カウンタ有
+    /// Playback time counter enabled
     pub is_length_counter_halt: bool,
+    // Playback time counter value
     pub counter_load: u8,
-    // $400a, $400b
+    // frequency $400a, $400b
     pub timer_value: u16,
+    // playback time
     pub length_counter_load: u8,
 }
 
@@ -74,12 +84,15 @@ impl Default for TriangleSound {
 
 #[derive(Copy, Clone)]
 pub struct NoiseSound {
-    // $400c
+    // Playback time counter enabled $400c
     pub is_length_counter_halt: bool,
+    // Acoustic selection
     pub is_constant_volume: bool,
+    // 4bit volume val
     pub volume: u8,
     // $400E
     pub is_noise_type_loop: bool,
+    // Playback time counter value
     pub noise_period: u8,
     // $400f
     pub length_counter_load: u8,
@@ -100,19 +113,28 @@ impl Default for NoiseSound {
 
 #[derive(Copy, Clone)]
 pub struct DmcSound {
-    // $4010
-    pub is_irq_enable: bool,
-    pub is_loop_enable: bool,
-    pub frequency: u8,
-    // $4011
-    pub load_counter: u8,
-    // $4012
-    /// $C000-FFFF
-    /// 11AAAAAA-AA000000
-    pub sample_addr: u8,
-    // $4013
-    /// 0000LLLL, LLLL0001
-    pub sample_length: u8,
+    / / $ 4010/ / / Rūpu-ji ni warikomi yūkō pub is _ irq _ inēburu: Bool, / / / rūpu yūkō pub is _ loop _ inēburu: Bool, / / / sanpururētobitto 4 bitto pub frequency: U 8, / / $ 4011/ / / saisei jikan pub load _ kauntā: U 8, / / $ 4012/ / / yomikomi-saki adoresu/ / / $ C 000 - FFFF o sanshō surunode 11 AAAAAA - AA 000000 pub sanpuru _ addr: U 8, / / $ 4013/ / / rūpu ni tsukau dēta-ryō/ / / 0000 LLLL, LLLL 0001 pub sanpuru _ rengusu: U 8,
+Show more
+387 / 5000
+Translation results
+// $ 4010
+     /// Interrupt enabled during Loop
+     pub is_irq_enable: bool,
+     /// Loop enabled
+     pub is_loop_enable: bool,
+     /// Sample rate bit 4bit
+     pub frequency: u8,
+     // $ 4011
+     /// Playback time
+     pub load_counter: u8,
+     // $ 4012
+     /// Read-to address
+     /// Refers to $ C000-FFFF, so 11AAAAAA-AA000000
+     pub sample_addr: u8,
+     // $ 4013
+     /// Amount of data used for the loop
+     /// 0000LLLL, LLLL0001
+     pub sample_length: u8, 
 }
 
 impl Default for DmcSound {
@@ -130,8 +152,7 @@ impl Default for DmcSound {
 
 #[derive(Clone)]
 pub struct Apu {
-    // Frame Sequencer、CPU
-    // 11bit
+    // Addition 11bit linked to CPU cycle
     pub frame_seq_counter: u16,
 }
 impl Default for Apu {
@@ -152,6 +173,6 @@ impl Apu {
     }
     // APU
     pub fn step(&mut self, _cpu: &mut Cpu, _cpu_cyc: u8) {
-        // TODO:
+        // TODO: kms
     }
 }
