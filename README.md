@@ -40,8 +40,8 @@ NES emulator written in Rust completely from scratch based only on publicly avai
     - [ ] ROM Selection Bootloader
     
 ## Dependencies
-Install list for mac users(todo: create makefile)
-1. Assuming you have rust and node
+Install list for new users(todo: create makefile)
+1. Assuming you have `rust` and `node`
 2. You will need the following
 ```shell
 brew install cmake
