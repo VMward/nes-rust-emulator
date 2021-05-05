@@ -12,3 +12,14 @@ Cargo.lock
 *.rlib
 *.log
 *.state
+
+/roms/my_dump/*.nes
+*.bmp
+*.log
+
+**/node_modules
+**/dist
+*.txt
+
+**/*.out
+**/BUILD
