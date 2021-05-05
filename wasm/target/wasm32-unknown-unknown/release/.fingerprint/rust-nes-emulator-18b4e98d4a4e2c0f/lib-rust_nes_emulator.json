@@ -1,0 +1,1 @@
+{"rustc":2624477146670686978,"features":"[\"default\", \"unsafe-opt\"]","target":2203669197647359142,"profile":2033823695588623180,"path":13114004204288856002,"deps":[],"local":[{"CheckDepInfo":{"dep_info":"wasm32-unknown-unknown/release/.fingerprint/rust-nes-emulator-18b4e98d4a4e2c0f/dep-lib-rust_nes_emulator"}}],"rustflags":[],"metadata":1249298402487537620,"config":0}
