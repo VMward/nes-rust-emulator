@@ -67,6 +67,7 @@ impl Default for TriangleSound {
             counter_load: 0,
             timer_value: 0,
             length_counter_load: 0,
+
         }
     }
 }
