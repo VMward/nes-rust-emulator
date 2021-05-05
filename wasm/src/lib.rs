@@ -88,18 +88,14 @@ impl WasmEmulator {
         console_log!("WasmEmulator::new()");
         WasmEmulator::default()
     }
-    /// fbのポインタを取得します
     pub fn get_fb_ptr(&self) -> *const [[u8; NUM_OF_COLOR]; VISIBLE_SCREEN_WIDTH] {
         console_log!("WasmEmulator::get_fb_ptr()");
         self.fb.as_ptr()
     }
-    /// 1get_fb_ptr`で得られる配列のサイズを返します
     pub fn get_fb_size(&self) -> usize {
         console_log!("WasmEmulator::get_fb_size()");
         NUM_OF_COLOR * VISIBLE_SCREEN_WIDTH * VISIBLE_SCREEN_HEIGHT
     }
-    /// エミュレータをリセットします
-    /// カセットの中身はリセットしないので実機のリセット相当の処理です
     pub fn reset(&mut self) {
         console_log!("WasmEmulator::reset()");
         self.fb = [[[0; NUM_OF_COLOR]; VISIBLE_SCREEN_WIDTH]; VISIBLE_SCREEN_HEIGHT];
@@ -108,8 +104,8 @@ impl WasmEmulator {
         self.ppu.reset();
         self.cpu.interrupt(&mut self.cpu_sys, Interrupt::RESET);
     }
-    /// .nesファイルを読み込みます
-    /// `data` - nesファイルのバイナリ
+    /// .nes
+    /// `data` - nes
     pub fn load(&mut self, binary: &[u8]) -> bool {
         console_log!("WasmEmulator::load()");
         let success = self
@@ -121,13 +117,12 @@ impl WasmEmulator {
         }
         success
     }
-    /// 描画領域1面分更新します
-    /// TODO: APU対応で1lineごとにする
+    /// TODO: APU
     pub fn step_line(&mut self) {
         // console_log!("WasmEmulator::step_line()");
         let mut total_cycle: usize = 0;
         while total_cycle < CYCLE_PER_DRAW_FRAME {
-            // for debug
+            // debug
             // console_log!("a:{:02X} x:{:02X} y:{:02X} pc:{:04X} sp:{:02X} p:{:02X} ", self.cpu.a, self.cpu.x, self.cpu.y, self.cpu.pc, self.cpu.sp, self.cpu.p);
 
             let cpu_cycle = usize::from(self.cpu.step(&mut self.cpu_sys));
@@ -135,10 +130,9 @@ impl WasmEmulator {
                 self.cpu.interrupt(&mut self.cpu_sys, interrupt);
             }
             total_cycle = total_cycle + cpu_cycle;
-            // TODO: apu対応(1面分更新だとタイミング的に厳しいかも #8)
+            // TODO: apu
         }
     }
-    /// キー入力します
     pub fn update_key(&mut self, key: KeyEvent) {
         match key {
             KeyEvent::PressA => self.cpu_sys.pad1.push_button(PadButton::A),
