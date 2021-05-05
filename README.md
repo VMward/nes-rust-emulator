@@ -39,3 +39,14 @@ NES emulator written in Rust completely from scratch based only on publicly avai
     - [ ] Savestate support
     - [ ] ROM Selection Bootloader
     
+## Dependencies
+Install list for mac users(todo: create makefile)
+1. Assuming you have rust and node
+2. You will need the following
+```shell
+brew install cmake
+sudo apt install nodejs npm
+sudo npm install -g n
+sudo n 10.15.1
+cargo install wasm-pack
+```
